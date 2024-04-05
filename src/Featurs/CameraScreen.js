@@ -9,7 +9,7 @@ export default function Camera({navigation}){
     }
     return (
         <View>
-            <Text> Mon écran Shorts </Text>
+            <Text> Mon écran Camera </Text>
             <Button
                 title="Aller vers profil"
                 onPress= {goToProfil}

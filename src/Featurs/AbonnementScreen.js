@@ -9,7 +9,7 @@ export default function Abonnement({navigation}){
     }
     return (
         <View>
-            <Text> Mon écran Shorts </Text>
+            <Text> Mon écran Abonnement </Text>
             <Button
                 title="Aller vers profil"
                 onPress= {goToProfil}

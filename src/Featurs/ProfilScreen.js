@@ -1,37 +1,23 @@
-import React, { useState } from 'react';
-import { View, Text, Button, TextInput, useColorScheme, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useContext } from 'react';
+import { View, Text, Button } from 'react-native';
+import { Auth } from 'aws-amplify';
 
-export default function Profil({navigation}){
-    const {setIsAuthenticated} = useContext(AuthContext)
-        const signOut = async () => {
+export default function Profil({ navigation }) {
+    const setIsAuthenticated = (useContext)
+    const signOut = async () => {
         try {
-            await Auth.signOut()
+            await Auth.signOut();
             setIsAuthenticated(false)
-        }catch(error){
-            console.log('error for signOut')
-        }}
+        } catch (error) {
+            console.log('Error for signOut:', error);
+        }
+    };
 
     return (
         <View>
-            <Text>Nom d'utilisateur:</Text>
-            <TextInput
-                style={styles.input}
-                value={login}
-                onChangeText={(text) => setLogin(text)}
-                placeholder="Nom d'utilisateur"
-            />
-        <Text>Mot de passe:</Text>
-        <TextInput
-            style={styles.input}
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            placeholder="Mot de passe"
-            secureTextEntry={true}
-        />
-        <Button title="Connexion" onPress={signIn} />
-    </View>
-
+            <Text> Mon écran Profil </Text>
+            <Text>Je me déconnecte</Text>
+            <Button title="Déconnexion" onPress={signOut} />
+        </View>
     );
 }

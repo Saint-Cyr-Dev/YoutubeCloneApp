@@ -9,7 +9,7 @@ import Camera from "./src/Featurs/CameraScreen";
 import Abonnement from "./src/Featurs/AbonnementScreen";
 import Profil from "./src/Featurs/ProfilScreen";
 import Shorts from "./src/Featurs/ShortScreen";
-import SignInScreen from "./src/Featurs/singn-in/SignInScreen";
+import SignInScreen from "./src/Featurs/singn/SingnScreen";
 
 import { Amplify } from 'aws-amplify';
 import amplifyconfig from './amplifyconfiguration';
@@ -21,18 +21,21 @@ import { Auth } from 'aws-amplify';
 import IconFondation from 'react-native-vector-icons/Foundation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { LogBox, Alert } from 'react-native';
 LogBox.ignoreAllLogs(); 
 
-export const AuthContext = createContext({ isAuthenticated: false });
+export const AuthContext = createContext({});
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 function BottomNavigation() {
     const authContext = useContext(AuthContext);
+    const {titre, alertTest, isAuthenticated, SetIsAuthenticated} = authContext
+    //console.log('value context:' + Json.stringfy(titre))
+
 
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }}
@@ -53,7 +56,7 @@ function BottomNavigation() {
                         <MaterialIcons name="replay-30" color={color} size={26} />
                     ),
                 }} />
-            {authContext.isAuthenticated ? <Tab.Screen name="Camera" component={Camera}
+            {isAuthenticated ? <Tab.Screen name="Camera" component={Camera}
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (
@@ -67,7 +70,7 @@ function BottomNavigation() {
                         <MaterialCommunityIcons name="youtube-subscription" color={color} size={26} />
                     ),
                 }} />
-            {authContext.isAuthenticated ? <Tab.Screen name="Profil" component={Profil}
+            {isAuthenticated ? <Tab.Screen name="Profil" component={Profil}
                 options={{
                     tabBarLabel: 'Vous',
                     tabBarIcon: ({ color }) => (
@@ -88,12 +91,13 @@ export default function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     return (
-        <AuthContext.Provider value={{
-            isAuthenticated,
-            setIsAuthenticated,
-            titre: "ShortsTitle",
-            alertTest: () => { Alert.alert('test fonction', 'ceci est une fonction envoyée par context') }
-        }}>
+        <AuthContext.Provider value = {
+            {
+             isAuthenticated,
+             setIsAuthenticated,
+             titre:"shortTitle",
+            alert:()=>{Alert.alert('test fonction', 'ceci est une fonction envoyée par context')}
+            }}>
             <NavigationContainer>
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="BottomNav" component={BottomNavigation} />

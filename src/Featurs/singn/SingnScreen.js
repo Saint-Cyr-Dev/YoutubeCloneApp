@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import { Auth } from 'aws-amplify';
 
+import styles from './styles'
+
 export default function SignInScreen({ navigation }) {
     const [login, setLogin] = useState('spleencyr@gmail.com');
     const [password, setPassword] = useState('Youtube04@');
@@ -88,19 +90,3 @@ export default function SignInScreen({ navigation }) {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-        paddingHorizontal: 10,
-        width: '100%',
-    },
-});
